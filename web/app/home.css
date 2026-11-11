@@ -1,0 +1,146 @@
+/* Dasein home: ring.heyarca.app's paper, ink and hairlines. One idea per screen, motion from scroll. */
+body:has(.ds){background:#fff;font-family:"Satoshi",system-ui,sans-serif}
+.ds{--ink:#141414;--mute:#8d8d89;--hair:#e4e4e0;--paper:#fff;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  position:relative;background:var(--paper);color:var(--ink);font:400 17px/1.55 "Satoshi",system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;overflow-x:clip}
+.ds a{color:inherit}
+.ds nav,.ds footer{padding:0}
+.ds .mono{font-family:var(--mono);font-size:12px;line-height:1.5;letter-spacing:0;font-weight:400}
+
+/* paper grain, very faint */
+.ds .grain{position:fixed;inset:0;pointer-events:none;z-index:5;opacity:.035;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* top bar, like ring's: tiny mono, low contrast */
+.ds .top{position:fixed;top:0;left:0;right:0;z-index:4;display:flex;justify-content:space-between;align-items:flex-start;
+  padding:max(14px,env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) 0 max(16px,env(safe-area-inset-left));
+  font:12px/1.4 var(--mono);pointer-events:none;padding-bottom:22px;
+  background:linear-gradient(var(--paper) 55%,color-mix(in srgb,var(--paper) 0%,transparent))}
+.ds .top a{pointer-events:auto;text-decoration:none;opacity:.55;transition:opacity .2s}
+.ds .top a:hover,.ds .top a:focus-visible{opacity:1;text-decoration:underline;text-underline-offset:3px}
+.ds .top .mark{opacity:.9;display:flex;align-items:center;gap:7px}
+.ds .top nav{display:flex;flex-direction:column;align-items:flex-end;gap:4px}
+.ds .o{display:inline-block;width:9px;height:9px;border:1.5px solid currentColor;border-radius:50%}
+
+/* scroll-scrubbed reveal: --p comes from the scene, --a is when this element arrives */
+.ds .rv{--t:clamp(0,calc((var(--p,0) - var(--a,0)) / var(--d,.12)),1);
+  opacity:var(--t);transform:translateY(calc((1 - var(--t)) * 18px));filter:blur(calc((1 - var(--t)) * 7px))}
+html:not(.js) .ds .rv{--t:1}
+
+/* scenes: a tall track with a pinned stage */
+.ds .scene{position:relative;height:300vh}
+.ds .stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;display:flex;flex-direction:column;
+  justify-content:center;padding:72px 16px 48px;max-width:1120px;margin:0 auto}
+.ds .kick{position:absolute;top:72px;left:16px;opacity:.5}
+.ds h1,.ds h2{font-weight:300;letter-spacing:-.035em;line-height:1.02;margin:0}
+.ds h1{font-size:clamp(40px,7vw,92px)}
+.ds h2{font-size:clamp(34px,5.4vw,68px)}
+
+/* 00 hero */
+.ds .hero{height:190vh}
+.ds .hero .stage{align-items:center;text-align:center;justify-content:flex-end;padding-bottom:17vh}
+.ds .ring{position:absolute;inset:0;width:100%;height:100%;
+  opacity:calc(1 - var(--p,0) * .2)}
+.ds .hero-t{position:relative;
+  transform:translateY(calc(var(--p,0) * -40px));opacity:calc(1 - var(--p,0) * 1.6);filter:blur(calc(var(--p,0) * 10px))}
+.ds .hero-t .mono{margin:18px 0 0;opacity:.5}
+.ds .hero .ring{height:62%;top:2%}
+.ds .cue{position:absolute;bottom:max(18px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);
+  opacity:calc(.45 - var(--p,0) * 2);display:flex;flex-direction:column;align-items:center;gap:8px}
+.ds .cue span{width:1px;height:34px;background:var(--ink);transform-origin:top;animation:cue 2.4s cubic-bezier(.6,0,.2,1) infinite}
+@keyframes cue{0%{transform:scaleY(0)}45%{transform:scaleY(1);transform-origin:top}55%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* 01 the problem: six voices, one sentence, then they collapse into one line */
+.ds .s1 .stage{justify-content:flex-start;padding-top:120px}
+.ds .rows{--c:clamp(0,calc((var(--p,0) - .6) / .2),1);--rh:66px;position:relative;height:calc(var(--rh) * 6);margin-top:44px}
+.ds .row{position:absolute;left:0;right:0;top:calc(var(--rh) * 2.5);display:grid;grid-template-columns:200px 1fr;gap:24px;align-items:baseline;
+  transform:translateY(calc((var(--i) - 2.5) * var(--rh) * (1 - var(--c))))}
+.ds .row .who{opacity:calc(var(--t) * .5 * (1 - var(--c)))}
+.ds .row .said{font-size:clamp(17px,1.9vw,22px);letter-spacing:-.01em}
+.ds .row:not(:first-child) .said{opacity:calc(var(--t) * (1 - var(--c) * .82))}
+.ds .cap{font-size:clamp(20px,2.2vw,26px);font-weight:300;letter-spacing:-.015em;margin:28px 0 0;color:var(--mute)}
+.ds .s1 .cap{position:absolute;bottom:14vh;left:16px}
+
+/* 02 where it comes from: voices drift to the mean, the tails go, one dot is left */
+.ds .s2 .stage{justify-content:flex-start;padding-top:120px}
+.ds .dist{width:100%;height:auto;max-height:34vh;margin:26px 0 8px;overflow:visible;
+  --q1:clamp(0,calc((var(--p,0) - .12) / .22),1);--q2:clamp(0,calc((var(--p,0) - .32) / .18),1);--q3:clamp(0,calc((var(--p,0) - .5) / .2),1)}
+.ds .dist .axis,.ds .dist .mean{stroke:var(--ink);stroke-width:.8;opacity:.25}
+.ds .dist .mean{stroke-dasharray:2 4;opacity:calc(.15 + var(--q3) * .5)}
+.ds .dist .curve{transform-box:view-box;transform-origin:500px 220px;transform:scaleX(calc(1 - var(--q3) * .82)) scaleY(calc(1 + var(--q3) * .5))}
+.ds .dist .curve path{fill:none;stroke:var(--ink);stroke-width:1;opacity:.55}
+.ds .dist circle{fill:var(--ink);
+  transform:translate(calc(var(--x) * (1 - var(--q1) * .35) * (1 - var(--q3) * .97) * 1px),calc(var(--y) * (1 - var(--q3)) * 1px));
+  opacity:calc((1 - var(--tail) * var(--q2)) * (1 - var(--q3) * .55))}
+.ds .why{list-style:none;padding:0;margin:8px 0 0;display:grid;gap:10px;max-width:640px}
+.ds .why li{font-size:16px;color:#3c3c3a}
+.ds .why b{display:inline-block;width:120px;opacity:.55}
+.ds .noworld{position:absolute;left:16px;right:16px;bottom:10vh;background:var(--paper);padding-top:16px}
+.ds .noworld .big{font-size:clamp(30px,4.6vw,58px);font-weight:300;letter-spacing:-.03em;line-height:1.05;margin:0}
+.ds .noworld .sub{margin:10px 0 0;color:var(--mute);font-size:17px}
+
+/* 03 the fix: three nodes on one engraved wire */
+.ds .s3 .stage{justify-content:center}
+.ds .chain{--w:clamp(0,calc((var(--p,0) - .1) / .6),1);position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:64px}
+.ds .wire{position:absolute;left:0;right:0;top:24px;height:1px;background:var(--ink);opacity:.35;transform-origin:left;transform:scaleX(var(--w))}
+.ds .node{position:relative}
+.ds .node svg{width:48px;height:48px;display:block;background:var(--paper);box-shadow:0 0 0 10px var(--paper)}
+.ds .node svg *{fill:none;stroke:var(--ink);stroke-width:1}
+.ds .node svg .fill{fill:var(--ink);stroke:none}
+.ds .node .mono{margin:22px 0 8px;opacity:.6}
+.ds .node p:last-child{margin:0;font-size:17px;line-height:1.5;max-width:300px}
+
+/* 04 the VS: the whole point */
+.ds .vs{position:relative;max-width:1120px;margin:0 auto;padding:18vh 16px 10vh}
+.ds .vs .kick{position:static;margin:0 0 26px}
+.ds .ask{font-size:clamp(26px,3.4vw,42px);font-weight:300;letter-spacing:-.025em;line-height:1.1;margin:0 0 56px}
+.ds .fair{margin:-40px 0 48px;opacity:calc(var(--t) * .5)}
+.ds .duo{--g:clamp(0,calc((var(--p,0) - .5) / .22),1);display:grid;grid-template-columns:1fr 1px 1fr;gap:56px}
+.ds .side header{display:flex;align-items:center;gap:8px;margin-bottom:22px;opacity:.6}
+.ds .side header .logo{width:13px;height:13px}
+.ds .side .txt{margin:0;font-size:clamp(18px,1.55vw,21px);line-height:1.62;letter-spacing:-.005em;white-space:pre-line}
+.ds .side footer{margin-top:26px;opacity:.55}
+.ds .side footer b{font-weight:400;color:var(--ink);opacity:1}
+.ds .ai .txt{color:color-mix(in srgb,var(--ink) calc(100% - var(--g) * 52%),#fff)}
+.ds .versus{position:relative;background:var(--hair)}
+.ds .versus span{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--paper);padding:10px 0;opacity:.5}
+.ds .cap.end{margin-top:72px;color:var(--ink);font-size:clamp(26px,3.2vw,40px);letter-spacing:-.025em}
+
+/* 05 out */
+.ds .out{max-width:1120px;margin:0 auto;padding:6vh 16px max(40px,env(safe-area-inset-bottom))}
+.ds .out nav{display:flex;gap:28px;flex-wrap:wrap;font-size:13px}
+.ds .out nav a{text-decoration:none;border-bottom:1px solid var(--hair);padding-bottom:3px;transition:border-color .2s}
+.ds .out nav a:hover{border-color:var(--ink)}
+.ds .foot{margin:18vh 0 0;opacity:.45}
+
+@media (max-width:760px){
+  .ds{font-size:16px}
+  .ds h1{font-size:33px}
+  .ds h2{font-size:32px}
+  .ds .stage{padding:64px 16px 32px}
+  .ds .kick{top:64px}
+  .ds .s1 .stage,.ds .s2 .stage{padding-top:104px}
+  .ds .rows{--rh:74px;margin-top:28px}
+  .ds .row{grid-template-columns:1fr;gap:2px}
+  .ds .row .said{font-size:16px;line-height:1.4}
+  .ds .s1 .cap{bottom:9vh}
+  .ds .dist{margin:18px 0 4px}
+  .ds .why li{font-size:14px}
+  .ds .why b{display:block;width:auto;margin-bottom:1px}
+  .ds .noworld{bottom:6vh}
+  .ds .chain{grid-template-columns:1fr;gap:30px;margin-top:40px;padding-left:0}
+  .ds .wire{left:24px;right:auto;top:0;bottom:0;width:1px;height:auto;transform-origin:top;transform:scaleY(var(--w))}
+  .ds .node{display:grid;grid-template-columns:48px 1fr;column-gap:20px}
+  .ds .node svg{grid-row:span 2}
+  .ds .node .mono{margin:4px 0 4px}
+  .ds .node p:last-child{font-size:15px}
+  .ds .vs{padding-top:12vh}
+  .ds .ask{margin-bottom:36px}
+  .ds .fair{margin:-24px 0 32px}
+  .ds .duo{grid-template-columns:1fr;gap:34px}
+  .ds .versus{height:1px}
+  .ds .versus span{padding:0 12px}
+  .ds .cap.end{margin-top:48px}
+}
+@media (prefers-reduced-motion:reduce){.ds .cue span{animation:none}}

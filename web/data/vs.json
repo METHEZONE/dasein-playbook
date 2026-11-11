@@ -1,0 +1,20 @@
+{
+  "_note": "Real W2 outputs, ~/tell-data/eval/results.json pipeline v2.4 (frozen 21:15 Taipei), task day-blog. Left: S5 Claude + same context, median of 3 seeds. Right: S6 Dasein (astra+fix, post fact-fix). score = headline independent judge (qwen3.8-27b rubric, not used in selection), mean over the 3 demo tasks (n=3) from bench.headline_qwen27b_rubric; null hides it. Public copy: roles only, no real names.",
+  "draft": false,
+  "prompt": "Write a short blog post about my day today.",
+  "note": "Both given the same day.",
+  "metric": "independent judge · avg of 3 tasks (n=3)",
+  "ai": {
+    "label": "Claude · same context",
+    "vendors": [
+      "anthropic"
+    ],
+    "score": 0.6381,
+    "text": "Wednesday in Taipei started with a short call with a mentor, mostly scheduling follow-ups. I told my agent to send the message as is.\n\nAround 4pm, someone opened my Arca Ring web card on an iPhone and left nothing. I had trimmed the demo an hour earlier, so a tap shows only the web card. Later, an attendee at the hackathon opened it and tapped through to LinkedIn. A third tap came in the evening, and again nothing was left. Three taps in one day is a start.\n\nI got to the c0mpiled-18 venue on Nanjing East Road at 17:35. It's the YC Startup School Hackathon. The power failed for a while during orientation, and there are 15 judges, some here and some in the US. The clock started at 18:00, and submission is at 22:45.\n\nAt 20:00 I started building with parallel agents: one for my own voice data, one for training, one for the web demo, one for the paper. The idea is an AI that writes like a specific human, trained on his real context."
+  },
+  "dasein": {
+    "label": "Dasein",
+    "score": 0.9905,
+    "text": "First ring tap today in Taipei. Someone opened the Arca Ring web card and left nothing.\n\nI'd trimmed the demo an hour earlier. Just the web card now. No App Clip overlay. Less stuff between the tap and the person.\n\nBy the third tap, at the hackathon, another attendee opened the card. Nothing left again.\n\nI want the interaction to take almost nothing. Then I look at the nothing and try to figure out what it means. Very reasonable founder behavior.\n\nPrivacy should include the right to open something and disappear. No little receipt for me saying whether it made sense. I think that's right. Still want the receipt, apparently.\n\nAn interface can get out of someone's way so completely that I can't tell whether it worked or they just left.\n\nThe card opened. That much I know.\n\nI'd like to know more. That's the awkward part."
+  }
+}

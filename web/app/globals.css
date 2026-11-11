@@ -1,0 +1,64 @@
+/* Base + the secondary pages (/duel, /bench). Tokens and top bar come from home.css (.ds). Mobile first. */
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+html,body{margin:0;overflow-x:clip;background:#fff}
+
+.ds.tool .page{max-width:760px;margin:0 auto;padding:96px 16px 0}
+.ds.tool .kick{position:static;margin:0 0 18px;opacity:.5}
+.ds.tool h1{font-size:clamp(34px,7vw,56px);margin:0 0 22px}
+.ds.tool .sub{color:var(--mute);margin:0 0 18px;font-size:16px;max-width:560px}
+.ds.tool .ask{margin:0 0 28px;font-size:clamp(20px,3.4vw,26px);font-weight:300;letter-spacing:-.015em;line-height:1.25}
+.ds.tool .ask .mono{display:block;opacity:.5;margin-bottom:6px}
+
+/* load-in: blur up, staggered by --i */
+.ds.tool .in{animation:inup .9s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i,0) * 90ms)}
+@keyframes inup{from{opacity:0;transform:translateY(16px);filter:blur(7px)}to{opacity:1;transform:none;filter:none}}
+
+/* the two texts */
+.ds.tool .pick{display:grid;gap:0;border-top:1px solid var(--hair)}
+.ds.tool .opt{all:unset;box-sizing:border-box;display:block;cursor:pointer;padding:22px 0 24px;border-bottom:1px solid var(--hair);
+  -webkit-tap-highlight-color:transparent;transition:color .6s ease,opacity .6s ease}
+.ds.tool .opt:focus-visible{outline:1px solid var(--ink);outline-offset:4px}
+.ds.tool .opt .lbl{display:block;opacity:.5;margin-bottom:10px}
+.ds.tool .opt .txt{display:block;font-size:18px;line-height:1.6;letter-spacing:-.005em;white-space:pre-wrap}
+.ds.tool .opt:not(:disabled):hover .lbl{opacity:1}
+.ds.tool .opt:not(:disabled):active{opacity:.6}
+.ds.tool .done .opt{cursor:default}
+.ds.tool .done .opt:not(.win) .txt{color:#a3a3a0}
+.ds.tool .opt .who{display:flex;align-items:center;gap:8px;margin-top:16px;animation:inup .7s cubic-bezier(.2,.7,.2,1) both}
+.ds.tool .opt.win .who{opacity:1}
+.ds.tool .opt:not(.win) .who{opacity:.5}
+.ds.tool .opt.mine .lbl{opacity:1}
+.ds.tool .hint{opacity:.45;margin:16px 0 0}
+.ds.tool .after{margin:28px 0 0;animation:inup .8s cubic-bezier(.2,.7,.2,1) both}
+.ds.tool .verdict{font-size:clamp(26px,5vw,36px);font-weight:300;letter-spacing:-.025em;line-height:1.1;margin:0 0 18px}
+.ds.tool .next{all:unset;cursor:pointer;font-family:var(--mono);font-size:13px;border-bottom:1px solid var(--hair);padding-bottom:3px;transition:border-color .2s}
+.ds.tool .next:hover,.ds.tool .next:focus-visible{border-color:var(--ink)}
+
+/* tables: hairlines and mono numbers */
+.ds.tool .sec{margin:84px 0 0}
+.ds.tool .scroll{overflow-x:auto;margin:0 -16px;padding:0 16px}
+.ds.tool .rows{width:100%;border-collapse:collapse;font-size:15px}
+.ds.tool .rows th{font:12px/1.4 var(--mono);color:var(--mute);text-align:left;font-weight:400;white-space:nowrap;padding:0 10px 10px 0;border-bottom:1px solid var(--ink)}
+.ds.tool .rows td{padding:13px 10px 13px 0;border-bottom:1px solid var(--hair);white-space:nowrap}
+.ds.tool .rows td:first-child{font:12px var(--mono);color:var(--mute);width:28px}
+.ds.tool .rows .num{text-align:right;font-family:var(--mono);font-size:13px;font-variant-numeric:tabular-nums}
+.ds.tool .rows tr.me td{color:var(--ink)}
+.ds.tool .rows tr:not(.me) td:not(:first-child){color:#4a4a47}
+.ds.tool .rows .nm{display:inline-flex;align-items:center;gap:8px}
+.ds.tool .bar{display:inline-block;height:1px;background:var(--ink);vertical-align:middle;margin-right:10px;opacity:.6}
+.ds.tool .note{font:12px/1.5 var(--mono);color:var(--mute);margin:14px 0 0}
+.ds.tool .m3{display:grid;gap:26px;margin:8px 0 28px}
+.ds.tool .m3 div{border-top:1px solid var(--hair);padding-top:14px;font-size:16px;line-height:1.55}
+.ds.tool .m3 b{display:block;font:12px/1.4 var(--mono);color:var(--mute);font-weight:400;margin-bottom:8px}
+.ds.tool .sec p{max-width:600px}
+.ds.tool .foot{max-width:760px;margin:16vh auto 0;padding:0 16px max(40px,env(safe-area-inset-bottom));opacity:.45}
+
+.logo{width:13px;height:13px;flex:none}
+.tdot{display:inline-block;width:9px;height:9px;border:1.5px solid currentColor;border-radius:50%;flex:none}
+
+@media(min-width:760px){
+  .ds.tool .page{padding-top:120px}
+  .ds.tool .m3{grid-template-columns:repeat(3,1fr)}
+}
+@media (prefers-reduced-motion:reduce){.ds.tool .in,.ds.tool .after,.ds.tool .opt .who{animation:none}}

@@ -1,0 +1,10 @@
+{
+ "n_train": 14942,
+ "hc3_heldout_acc": 0.9187,
+ "min_vs_ai_heldout_acc": 0.9744,
+ "n_min_test": 312,
+ "hc3_human": 5768,
+ "hc3_ai": 8257,
+ "min_human": 777,
+ "min_ai": 776
+}

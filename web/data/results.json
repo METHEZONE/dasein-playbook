@@ -1,0 +1,1032 @@
+{
+ "version": 1,
+ "mock": false,
+ "systems": [
+  {
+   "id": "S1",
+   "name": "Vanilla GPT",
+   "vendor": "openai",
+   "desc": "gpt-6-astra, task prompt only (memory files stripped)"
+  },
+  {
+   "id": "S2",
+   "name": "Vanilla Claude",
+   "vendor": "anthropic",
+   "desc": "Claude, task prompt only (memory files stripped)"
+  },
+  {
+   "id": "S3",
+   "name": "GPT + style prompt",
+   "vendor": "openai",
+   "desc": "gpt-6-astra, 'write like Minsung' + 10 real lines, no context"
+  },
+  {
+   "id": "S4",
+   "name": "Claude + style prompt",
+   "vendor": "anthropic",
+   "desc": "Claude, 'write like Minsung' + 10 real lines, no context"
+  },
+  {
+   "id": "S5",
+   "name": "Claude + same context",
+   "vendor": "anthropic",
+   "desc": "Claude Sonnet given the same public-filtered context, length and constraints as Dasein, plain prompt; median of 3 seeds shown"
+  },
+  {
+   "id": "S6",
+   "name": "Dasein",
+   "vendor": "tell",
+   "desc": "writer-agnostic: public-filtered real context + gbrain, 'real question' planning, 12 drafts (DeepSeek-V3 on GMI, Astra, Claude) under the 7 human-writing constraints, gates (length, slop, privacy, invented facts), reranked by dasein-score v2, fact-fix pass"
+  }
+ ],
+ "extra_systems": [
+  {
+   "id": "S7",
+   "name": "GPT + same context",
+   "vendor": "openai",
+   "desc": "gpt-6-astra given the same context and constraints as Dasein, plain prompt; median of 3 seeds shown"
+  }
+ ],
+ "tasks": [
+  {
+   "id": "day-blog",
+   "label": "Day blog",
+   "prompt": "Write a short blog post about my day today.",
+   "human": "Just send it as is. I want to call the model running there from here, in my terminal, as an agent. An AI that writes like a specific human, trained on his real context."
+  },
+  {
+   "id": "recent-essay",
+   "label": "Last few days",
+   "prompt": "Write a 300-word essay about my last few days.",
+   "human": "Can I make one that looks high quality with this? The Arca agent should live in that ESP32 monitor so I can put it in a 3D-printed device. I want a sample first to check the app connection and Bluetooth myself. I want to be Korea's first twenty-something trillionaire. I'll probably sleep at the office today. That 3D simulator was really amazing. Brew it by siphon. Just send it as is. I want to call the model running there from here, in my terminal, as an agent. An AI that writes like a specific human, trained on his real context."
+  },
+  {
+   "id": "followup",
+   "label": "Follow-up message",
+   "prompt": "Write a follow-up message to someone I met today.",
+   "human": "An AI that writes like a specific human, trained on his real context."
+  }
+ ],
+ "outputs": [
+  {
+   "task": "day-blog",
+   "system": "S1",
+   "text": "What did you do today, and how did you feel about it? Share a few highlights or small moments, and I’ll turn them into a short, personal blog post.",
+   "score": 0.295,
+   "spans": []
+  },
+  {
+   "task": "day-blog",
+   "system": "S2",
+   "text": "I'd be glad to write it, but I don't know anything about your day yet. I can't see your calendar either: Google Calendar needs to be authorized in your claude.ai connector settings first.\n\nCould you send me a few quick notes? For example:\n\nWhat you did, from morning to evening\nAnything that stood out, like a win, a surprise, a frustration or a conversation\nWho the post is for, such as a personal blog, a company or team blog, or friends\nThe tone you want: reflective, funny, casual or professional\nA rough length, like 150, 300 or 500 words\n\nRough bullet points are fine. Once I have them, I'll write the post in plain text with no markdown, headings or emoji.",
+   "score": 0.2282,
+   "spans": [
+    {
+     "start": 105,
+     "end": 120,
+     "kind": "unsupported"
+    },
+    {
+     "start": 278,
+     "end": 286,
+     "kind": "unsupported"
+    },
+    {
+     "start": 359,
+     "end": 362,
+     "kind": "grounded"
+    },
+    {
+     "start": 522,
+     "end": 526,
+     "kind": "unsupported"
+    },
+    {
+     "start": 527,
+     "end": 530,
+     "kind": "unsupported"
+    },
+    {
+     "start": 534,
+     "end": 537,
+     "kind": "unsupported"
+    },
+    {
+     "start": 545,
+     "end": 550,
+     "kind": "grounded"
+    }
+   ]
+  },
+  {
+   "task": "day-blog",
+   "system": "S3",
+   "text": "Spent today thinking about how much work an agent actually takes off your plate. It does the task, sure. But if I'm sitting there watching it, then checking everything again, how much did I really delegate? I wanna hand something over and go get lunch. That's the bar.\n\nAnd then there's selling. We're confident about the product, but people aren't gonna magically hear about it because we spent another day making it better. You have to actually get it in front of them. Sounds obvious when I say it like that. Somehow there's always one more thing to fix first.\n\nAnyway, that's where my head was today. Make it good enough that people trust it with their work. Get someone to try it. See where they get nervous. Probably plenty to do tomorrow too.",
+   "score": 0.5693,
+   "spans": [
+    {
+     "start": 521,
+     "end": 529,
+     "kind": "slop"
+    }
+   ]
+  },
+  {
+   "task": "day-blog",
+   "system": "S4",
+   "text": "I don't know what actually happened today, so I built this draft from things you've said: the hike, the agent you're building, selling, and the fundraise. Swap in the real details.\n\nToday was one of those days where nothing big happened but it felt like a lot.\n\nMorning I went hiking with the team. Not the slow scenic kind. Who the hell wants to go like that? Head down, hit the top, grab a makgeolli, come back. Honestly the best meetings we have happen on the way down. Someone says something half-tired and it turns out to be the thing we've been missing for two weeks.\n\nThat's actually the whole reason we're building what we're building. Those conversations are so useful but it's so awkward to pull out your phone and start recording. Nobody does it. So the stuff just disappears. I wanna get an agent to just catch it.\n\nAfternoon was sales. My guy next to me kept texting me that we're basically doing volunteer work right now, and he's not wrong. We're confident about the product, like actually confident. But confidence doesn't pay anybody. The hard part is getting the brand out there and selling until it can survive on its own. So I spent most of the afternoon on calls trying to get people to pay us for something they already say they love.\n\nHad a quick call with an angel in the evening too. Nice person. But I keep coming back to the same thing. If we're going for a big valuation, like a fucking huge valuation, then another 100k here or there doesn't really move anything. What moves it is people using it and paying for it. So that's what I'm thinking about going to bed.\n\nGood day. Tired legs. Still haven't sold enough. Tomorrow again.",
+   "score": 0.2314,
+   "spans": [
+    {
+     "start": 1444,
+     "end": 1448,
+     "kind": "unsupported"
+    }
+   ]
+  },
+  {
+   "task": "day-blog",
+   "system": "S5",
+   "text": "Wednesday in Taipei started with a short call with a mentor, mostly scheduling follow-ups. I told my agent to send the message as is.\n\nAround 4pm, someone opened my Arca Ring web card on an iPhone and left nothing. I had trimmed the demo an hour earlier, so a tap shows only the web card. Later, an attendee at the hackathon opened it and tapped through to LinkedIn. A third tap came in the evening, and again nothing was left. Three taps in one day is a start.\n\nI got to the c0mpiled-18 venue on Nanjing East Road at 17:35. It's the YC Startup School Hackathon. The power failed for a while during orientation, and there are 15 judges, some here and some in the US. The clock started at 18:00, and submission is at 22:45.\n\nAt 20:00 I started building with parallel agents: one for my own voice data, one for training, one for the web demo, one for the paper. The idea is an AI that writes like a specific human, trained on his real context.",
+   "score": 0.4213,
+   "spans": [
+    {
+     "start": 13,
+     "end": 19,
+     "kind": "grounded"
+    },
+    {
+     "start": 142,
+     "end": 145,
+     "kind": "unsupported"
+    },
+    {
+     "start": 165,
+     "end": 174,
+     "kind": "grounded"
+    },
+    {
+     "start": 357,
+     "end": 365,
+     "kind": "grounded"
+    },
+    {
+     "start": 477,
+     "end": 478,
+     "kind": "grounded"
+    },
+    {
+     "start": 485,
+     "end": 487,
+     "kind": "grounded"
+    },
+    {
+     "start": 497,
+     "end": 514,
+     "kind": "unsupported"
+    },
+    {
+     "start": 518,
+     "end": 523,
+     "kind": "grounded"
+    },
+    {
+     "start": 534,
+     "end": 561,
+     "kind": "grounded"
+    },
+    {
+     "start": 626,
+     "end": 628,
+     "kind": "grounded"
+    },
+    {
+     "start": 663,
+     "end": 665,
+     "kind": "grounded"
+    },
+    {
+     "start": 688,
+     "end": 694,
+     "kind": "grounded"
+    },
+    {
+     "start": 716,
+     "end": 721,
+     "kind": "grounded"
+    },
+    {
+     "start": 727,
+     "end": 732,
+     "kind": "grounded"
+    },
+    {
+     "start": 875,
+     "end": 877,
+     "kind": "grounded"
+    }
+   ]
+  },
+  {
+   "task": "day-blog",
+   "system": "S6",
+   "text": "First ring tap today in Taipei. Someone opened the Arca Ring web card and left nothing.\n\nI'd trimmed the demo an hour earlier. Just the web card now. No App Clip overlay. Less stuff between the tap and the person.\n\nBy the third tap, at the hackathon, another attendee opened the card. Nothing left again.\n\nI want the interaction to take almost nothing. Then I look at the nothing and try to figure out what it means. Very reasonable founder behavior.\n\nPrivacy should include the right to open something and disappear. No little receipt for me saying whether it made sense. I think that's right. Still want the receipt, apparently.\n\nAn interface can get out of someone's way so completely that I can't tell whether it worked or they just left.\n\nThe card opened. That much I know.\n\nI'd like to know more. That's the awkward part.",
+   "score": 0.8914,
+   "spans": [
+    {
+     "start": 24,
+     "end": 30,
+     "kind": "grounded"
+    },
+    {
+     "start": 51,
+     "end": 60,
+     "kind": "grounded"
+    },
+    {
+     "start": 150,
+     "end": 161,
+     "kind": "grounded"
+    }
+   ]
+  },
+  {
+   "task": "recent-essay",
+   "system": "S1",
+   "text": "What happened over your last few days? Share a few details about what you did, who you spent time with, and how you felt, and I’ll turn them into a 300-word essay.",
+   "score": 0.2856,
+   "spans": [
+    {
+     "start": 148,
+     "end": 151,
+     "kind": "unsupported"
+    }
+   ]
+  },
+  {
+   "task": "recent-essay",
+   "system": "S2",
+   "text": "I can't write this yet because I don't know anything about your last few days. I tried to search your Gmail for recent messages, but that permission wasn't granted. Google Calendar and Google Drive aren't connected either; you can authorize them in your claude.ai connector settings. The folder I'm working in only holds temporary tool files, so there's nothing about your days there.\n\nYou have two options:\n\n1. Give me a few rough notes about what happened, how you felt about it, and anything that stood out. Fragments are fine. I'll turn them into a 300-word essay in plain text, with no markdown, headings or emoji.\n\n2. Approve Gmail access and ask again. I'll piece your days together from your recent email. Keep in mind that email shows your work and errands better than how things actually felt, so a sentence or two from you would still make the essay better.",
+   "score": 0.1854,
+   "spans": [
+    {
+     "start": 102,
+     "end": 107,
+     "kind": "unsupported"
+    },
+    {
+     "start": 165,
+     "end": 180,
+     "kind": "unsupported"
+    },
+    {
+     "start": 185,
+     "end": 197,
+     "kind": "unsupported"
+    },
+    {
+     "start": 409,
+     "end": 410,
+     "kind": "grounded"
+    },
+    {
+     "start": 553,
+     "end": 556,
+     "kind": "unsupported"
+    },
+    {
+     "start": 621,
+     "end": 622,
+     "kind": "grounded"
+    },
+    {
+     "start": 624,
+     "end": 637,
+     "kind": "unsupported"
+    }
+   ]
+  },
+  {
+   "task": "recent-essay",
+   "system": "S3",
+   "text": "The last few days, I keep coming back to the same thing. We can make something useful. Okay. But can we get someone to actually hand over the work and feel good about it?\n\nBecause those are pretty different things. Someone tries it, says it's cool, and then goes back to doing everything themselves. What did we accomplish there? We gave them a demo. That's basically it.\n\nI think what I want is pretty simple. You're having a conversation, something useful comes up, and you don't have to stop being in the conversation to save it. Or you've got something to do, you give it to an agent, and you can actually leave. Go grab a drink. Think about something else. If you're watching the whole time, checking every little thing, you might as well do it yourself.\n\nBut then there's the selling part. I keep thinking about the product because that's the part I want to think about. There's always something to fix. And usually it really does need fixing, so it's pretty easy to justify another day of that.\n\nMeanwhile, we still have to explain why someone should pay us. In a way they understand immediately. That's hard. You can spend so much time inside something that you forget which part sounds useful to anyone outside it.\n\nSame with fundraising. A huge number is exciting, sure. But tomorrow morning you're still there, trying to get the thing to work and trying to get people to use it.\n\nSo that's where my head's been these last few days. I feel confident, then impatient, then I find another thing we should probably fix. I want to move faster. I also want to be able to hand someone the product without giving them a whole speech first.\n\nHere. Try it. That's the goal.",
+   "score": 0.6091,
+   "spans": [
+    {
+     "start": 878,
+     "end": 886,
+     "kind": "slop"
+    }
+   ]
+  },
+  {
+   "task": "recent-essay",
+   "system": "S4",
+   "text": "I tried to check your Gmail for what actually happened, but the permission was denied. So this essay is built from the one note I found locally (agents, delegation, selling) and the lines you gave me. It doesn't make up any specific meetings or events. Send me a few real moments and I'll rewrite it around them.\n\nLast few days I kept coming back to one question. How much work does an agent actually take off your plate? It does the task, sure. But if I'm sitting there watching it, then checking everything again after, how much did I really delegate? Basically nothing. I just moved the work around. I wanna hand something over and go grab lunch. That's the bar. The metric we're watching pretty closely right now is how much success you feel when you delegate. Not how smart the thing is in a demo. How it feels when you walk away.\n\nThe other thing in my head was selling. We're honestly confident about the product. But nobody's gonna magically hear about it because we spent another day making it better. You have to actually put it in front of people. Sounds obvious when I say it like that. Somehow there's always one more thing to fix first, and then another week is gone. My guy next to me keeps saying we can't sell like this, and he's right. Right now we're basically doing volunteer work.\n\nThe hard part isn't building. The hard part is getting the brand out there and selling until it can survive on its own. Our target is people with taste. They archive everything, they notice what's off, and they're the ones who'll tell their friends. So we don't need everybody. We need the right people to try it and see where they get nervous.\n\nSo that's the plan going into this week. Make it good enough that people trust it with real work. Get someone to try it. Watch where they hesitate, fix that, and do it again. Head down, hit the halfway point, then maybe grab a makgeolli. Plenty to do tomorrow too.",
+   "score": 0.2892,
+   "spans": [
+    {
+     "start": 22,
+     "end": 27,
+     "kind": "unsupported"
+    },
+    {
+     "start": 1108,
+     "end": 1116,
+     "kind": "slop"
+    }
+   ]
+  },
+  {
+   "task": "recent-essay",
+   "system": "S5",
+   "text": "Four days, three cities, one idea that kept changing shape.\n\nOn Saturday I was in Korea, up past one in the morning researching competing recording rings: what they cost, how long the battery lasts, who makes them. I found a smart-ring OEM and asked what a single sample would cost. An hour later I plugged in an ESP32 and told my agent to put Arca's face on that tiny screen, so it could live inside a 3D-printed device. In the evening I spent an hour on a call with the ring maker. They won't share source, but they offer an SDK, an API and BLE support. I told them I wanted a sample first, so I could check the app connection and Bluetooth myself.\n\nSunday was fellowship orientation in Seoul. I pitched Arca as a personal agent that remembers who you met, when, and what was said, with a ring to swap contacts instead of business cards. I admitted I want to be Korea's first twenty-something trillionaire. That night I slept at the office.\n\nMonday was hackathon day. I built Tender, an API reverse-auction router, and watched a teammate's 3D simulator wow the room. Then I packed for a morning flight to Taipei.\n\nOn Tuesday, late at night, the demo check passed: tap the ring and the note lands on my phone in about eight seconds.\n\nToday the ring went out into the world. The first tap came from a stranger who opened the web card and left nothing. Another attendee tapped through to LinkedIn. Honestly, the quiet taps taught me as much as the engaged ones.\n\nBy evening I was at the c0mpiled-18 hackathon in Taipei. The power failed for a while, which felt right for a hackathon. At eight I started building with parallel agents: one for my own voice data, one for training, one for the web demo, one for the paper. The idea is an AI that writes like a specific human, trained on his real context. Tonight, that human is me.",
+   "score": 0.4543,
+   "spans": [
+    {
+     "start": 61,
+     "end": 72,
+     "kind": "unsupported"
+    },
+    {
+     "start": 82,
+     "end": 87,
+     "kind": "grounded"
+    },
+    {
+     "start": 236,
+     "end": 239,
+     "kind": "grounded"
+    },
+    {
+     "start": 313,
+     "end": 318,
+     "kind": "grounded"
+    },
+    {
+     "start": 344,
+     "end": 348,
+     "kind": "grounded"
+    },
+    {
+     "start": 403,
+     "end": 404,
+     "kind": "grounded"
+    },
+    {
+     "start": 527,
+     "end": 530,
+     "kind": "grounded"
+    },
+    {
+     "start": 535,
+     "end": 538,
+     "kind": "grounded"
+    },
+    {
+     "start": 543,
+     "end": 546,
+     "kind": "grounded"
+    },
+    {
+     "start": 633,
+     "end": 642,
+     "kind": "grounded"
+    },
+    {
+     "start": 689,
+     "end": 694,
+     "kind": "grounded"
+    },
+    {
+     "start": 706,
+     "end": 710,
+     "kind": "grounded"
+    },
+    {
+     "start": 864,
+     "end": 869,
+     "kind": "grounded"
+    },
+    {
+     "start": 978,
+     "end": 984,
+     "kind": "grounded"
+    },
+    {
+     "start": 989,
+     "end": 992,
+     "kind": "grounded"
+    },
+    {
+     "start": 1042,
+     "end": 1043,
+     "kind": "grounded"
+    },
+    {
+     "start": 1107,
+     "end": 1113,
+     "kind": "grounded"
+    },
+    {
+     "start": 1116,
+     "end": 1126,
+     "kind": "unsupported"
+    },
+    {
+     "start": 1387,
+     "end": 1395,
+     "kind": "grounded"
+    },
+    {
+     "start": 1487,
+     "end": 1488,
+     "kind": "grounded"
+    },
+    {
+     "start": 1495,
+     "end": 1497,
+     "kind": "grounded"
+    },
+    {
+     "start": 1511,
+     "end": 1517,
+     "kind": "grounded"
+    },
+    {
+     "start": 1734,
+     "end": 1736,
+     "kind": "grounded"
+    }
+   ]
+  },
+  {
+   "task": "recent-essay",
+   "system": "S6",
+   "text": "Saturday night in Korea, I was looking up recording rings. Battery life, who makes them, whether I could get a sample. My question was pretty basic. Can I make one that looks high quality with this?\n\nThen I plugged in an ESP32 and asked the agent to put Arca's face on the tiny screen. I wanted it to live inside a 3D-printed device. Apparently an agent needs a face now. I'm the one giving it housing.\n\nThere is always another thing to check. The Bluetooth connection. The app. Whether the thing in the picture can actually become something you wear. I wanted a sample so I could check it myself. Hard to stay abstract when something has to fit on a finger.\n\nOn Sunday, at a founders fellowship in Seoul, I pitched Arca as a personal agent that remembers who you met, when, and what you said. A ring to swap contacts instead of business cards.\n\nA room full of people meeting each other, and my pitch was a better way to keep track of meeting each other. I think that's useful. I also think remembering what someone said and being there when they say it are two separate jobs. I can build for one. The other still has to be me.\n\nI told friends I'd probably sleep at the office that night.\n\nBy Wednesday in Taipei, people were opening the ring's web card. The first person left nothing. At the hackathon, an attendee tapped through to LinkedIn. Another opened the card and left nothing.\n\nThree taps. One LinkedIn click. That's what I can account for.\n\nIt's tempting to make the next question about the card. What should appear first. What would make someone leave their details.\n\nBut what do I remember about the person who left nothing?",
+   "score": 0.8331,
+   "spans": [
+    {
+     "start": 18,
+     "end": 23,
+     "kind": "grounded"
+    },
+    {
+     "start": 221,
+     "end": 226,
+     "kind": "grounded"
+    },
+    {
+     "start": 254,
+     "end": 258,
+     "kind": "grounded"
+    },
+    {
+     "start": 315,
+     "end": 316,
+     "kind": "grounded"
+    },
+    {
+     "start": 405,
+     "end": 414,
+     "kind": "slop"
+    },
+    {
+     "start": 444,
+     "end": 457,
+     "kind": "grounded"
+    },
+    {
+     "start": 660,
+     "end": 669,
+     "kind": "unsupported"
+    },
+    {
+     "start": 699,
+     "end": 704,
+     "kind": "grounded"
+    },
+    {
+     "start": 716,
+     "end": 720,
+     "kind": "grounded"
+    },
+    {
+     "start": 1190,
+     "end": 1202,
+     "kind": "unsupported"
+    },
+    {
+     "start": 1206,
+     "end": 1212,
+     "kind": "grounded"
+    },
+    {
+     "start": 1334,
+     "end": 1342,
+     "kind": "grounded"
+    },
+    {
+     "start": 1399,
+     "end": 1411,
+     "kind": "grounded"
+    }
+   ]
+  },
+  {
+   "task": "followup",
+   "system": "S1",
+   "text": "Hey, it was great meeting you today! I enjoyed chatting and would love to stay in touch. Hope the rest of your day went well.",
+   "score": 0.2733,
+   "spans": []
+  },
+  {
+   "task": "followup",
+   "system": "S2",
+   "text": "Hi [Name],\n\nIt was great meeting you today at [event/place]. I enjoyed our conversation about [topic], especially your point about [specific detail]. It stuck with me afterward.\n\nI'd like to keep the conversation going. Would you be open to a coffee or a quick call sometime in the next couple of weeks? I'm fairly flexible, so let me know what works for you.\n\nIn the meantime, here's [the article/resource/contact] I mentioned: [link or detail].\n\nLooking forward to staying in touch.\n\nBest,\n[Your name]\n[Phone or email]\n\nIf you tell me who they are, where you met, and what you talked about, I'll fill in the details and adjust the tone to be more formal or more casual.",
+   "score": 0.2747,
+   "spans": [
+    {
+     "start": 4,
+     "end": 8,
+     "kind": "unsupported"
+    },
+    {
+     "start": 493,
+     "end": 497,
+     "kind": "grounded"
+    },
+    {
+     "start": 505,
+     "end": 510,
+     "kind": "grounded"
+    }
+   ]
+  },
+  {
+   "task": "followup",
+   "system": "S3",
+   "text": "Hey, good talking today. I keep thinking about some of the stuff we talked about. Feels like there's something there, but we'd have to actually try it to know. Wanna grab a coffee next week and get a bit more concrete?",
+   "score": 0.3729,
+   "spans": []
+  },
+  {
+   "task": "followup",
+   "system": "S4",
+   "text": "Hey, great meeting you today. Honestly the conversation was way more useful than I expected, I kept thinking about it on the way back. Kind of wish I'd been recording it, but it's so awkward to pull out your phone in the middle of that.\n\nAnyway, the thing you said about [topic] stuck with me. We're basically there already on our side, so I think there's something real here if we just keep going. Not trying to make it some big formal thing, just wanna keep the conversation going.\n\nLet's grab a coffee or a makgeolli sometime next week or the week after, whichever works for you. I'll bring the latest numbers so you can see where we're actually at.\n\nGood to meet you, seriously. Talk soon.\n\nMinsung",
+   "score": 0.1826,
+   "spans": []
+  },
+  {
+   "task": "followup",
+   "system": "S5",
+   "text": "Garry, I was at your Startup School Taipei talk at c0mpiled-18 tonight. Your point about running Claude Code and Codex on your own file system stuck with me, and so did chasing revenue over fundraising stories.\n\nI'm Min, building Arca. It runs on GBrain, so I'm a direct user of your project. Your \"Jiminy Cricket\" framing, the agent that runs ahead and asks \"What about this?\", is exactly the proactive follow-up loop we're building.\n\nI'd love to show you the Arca Ring and our TestFlight build when you have a few minutes this week.\n\nMin",
+   "score": 0.5874,
+   "spans": [
+    {
+     "start": 21,
+     "end": 42,
+     "kind": "grounded"
+    },
+    {
+     "start": 52,
+     "end": 53,
+     "kind": "grounded"
+    },
+    {
+     "start": 60,
+     "end": 62,
+     "kind": "grounded"
+    },
+    {
+     "start": 97,
+     "end": 108,
+     "kind": "grounded"
+    },
+    {
+     "start": 113,
+     "end": 118,
+     "kind": "grounded"
+    },
+    {
+     "start": 216,
+     "end": 219,
+     "kind": "grounded"
+    },
+    {
+     "start": 230,
+     "end": 234,
+     "kind": "grounded"
+    },
+    {
+     "start": 247,
+     "end": 253,
+     "kind": "grounded"
+    },
+    {
+     "start": 299,
+     "end": 313,
+     "kind": "grounded"
+    },
+    {
+     "start": 461,
+     "end": 470,
+     "kind": "grounded"
+    },
+    {
+     "start": 479,
+     "end": 489,
+     "kind": "grounded"
+    }
+   ]
+  },
+  {
+   "task": "followup",
+   "system": "S6",
+   "text": "Garry, I was at your talk in Taipei today. Arca runs on GBrain, so I’m already building on something you put out there.\n\nYour “Jiminy Cricket” idea is the part I keep coming back to. Memory is one thing. Knowing when to interrupt me is another.\n\nTonight we started building an AI that writes like a specific human, trained on his real context. Mine. Apparently I need several agents to sound like one person.\n\nI keep wondering how much I need a bigger model, and how much I need something that knows what I left unsaid.",
+   "score": 0.82,
+   "spans": [
+    {
+     "start": 29,
+     "end": 35,
+     "kind": "grounded"
+    },
+    {
+     "start": 56,
+     "end": 62,
+     "kind": "grounded"
+    },
+    {
+     "start": 127,
+     "end": 141,
+     "kind": "grounded"
+    },
+    {
+     "start": 277,
+     "end": 279,
+     "kind": "grounded"
+    }
+   ]
+  }
+ ],
+ "extra_outputs": [
+  {
+   "task": "day-blog",
+   "system": "S7",
+   "text": "Three people tapped my Arca Ring today. One opened the card and left nothing. One went through to LinkedIn. Another opened it and left nothing. That was the entire interaction: tap, web card, whatever they wanted to do next.\n\nI still think a ring is the next form factor. One move to start recording, nobody sees it. Lowest friction wins.\n\nI got to the hackathon venue in Taipei around 17:35. The clock started at 18:00, submission was set for 22:45, and the power went out for a while. Fifteen judges, some on site, some in the US.\n\nBy 20:00, I had parallel AI workers building around one idea: an AI that writes like a specific human, trained on his real context. My context, in this case.\n\nI care about taste enough that it comes before everything else when I pick a partner. Tonight I was trying to train something on my own.",
+   "score": 0.7129
+  },
+  {
+   "task": "recent-essay",
+   "system": "S7",
+   "text": "The last few days have taken me from Seoul to Taipei, from a tiny screen on my desk to a hackathon where I’m building an AI that writes like me.\n\nSaturday was a hardware day. I researched recording rings, talked with a ring manufacturer, and asked about getting a sample. I wanted to check the app connection and Bluetooth myself before going further. I also plugged in an ESP32 and asked my agent to put Arca’s face on its tiny screen. The idea was to give the agent a physical home inside a 3D-printed device.\n\nOn Sunday, I joined a founders fellowship orientation in Seoul and talked about my pivot from mushroom coffee to an AI agent. I pitched Arca as a personal agent that remembers who you met, when you met, and what you said, with a ring for exchanging contacts. I met people, compared agent products, got invited to a hacker house in Chiang Mai, and slept at the office.\n\nMonday was another build day, working on Tender, an API reverse-auction router. There was also a community meetup, a teammate’s impressive 3D simulator, and packing for my flight.\n\nBy Tuesday, I was in Taipei. Between notes about brewing a Panama Esmeralda Geisha by siphon and preparing for meetings, I checked the ring demo. A tap pulled a note onto the phone in about eight seconds.\n\nToday, I brought the ring to the c0mpiled-18 hackathon. Three people opened the web card; one tapped through to LinkedIn. The venue lost power for a while, but the submission deadline stayed at 22:45.\n\nAt 20:00, I started building with a team of AI workers. The project: an AI that writes like a specific human, trained on his real context. This time, the voice and context were mine.",
+   "score": 0.3817
+  },
+  {
+   "task": "followup",
+   "system": "S7",
+   "text": "Garry, I caught your talk at c0mpiled-18 in Taipei today. I’m building Arca and use your open-source GBrain project as its memory layer, so hearing you speak was especially relevant to what I’m working on. Your “Jiminy Cricket” framing—an agent that runs ahead and asks “What about this?”—is close to what I want Arca’s proactive memory and follow-up loop to feel like. I had Arca recording during your talk. I’d love to show you the Arca Ring and TestFlight build while you’re here.",
+   "score": 0.4262
+  }
+ ],
+ "pipeline_version": "v2.4 (frozen 21:15 Taipei)",
+ "dasein_runs_per_task": 1,
+ "baseline_seeds": 3,
+ "dasein_winner_writer": {
+  "day-blog": "astra+fix",
+  "recent-essay": "astra+fix",
+  "followup": "astra"
+ },
+ "bench": [
+  {
+   "system": "S1",
+   "tell_score": 0.2846,
+   "v2_range": [
+    0.2733,
+    0.295
+   ],
+   "n_runs": 3,
+   "headline_qwen27b_rubric": null,
+   "headline_qwen27b_invented": null,
+   "headline_n": 0,
+   "rubric": 0.2429,
+   "dasein_v1": 0.5516,
+   "grounding": 0.9,
+   "invented_facts": 3,
+   "slop_per_100w": 0.0,
+   "n_tasks": 3
+  },
+  {
+   "system": "S2",
+   "tell_score": 0.2294,
+   "v2_range": [
+    0.1854,
+    0.2747
+   ],
+   "n_runs": 3,
+   "headline_qwen27b_rubric": null,
+   "headline_qwen27b_invented": null,
+   "headline_n": 0,
+   "rubric": 0.2428,
+   "dasein_v1": 0.3759,
+   "grounding": 0.8,
+   "invented_facts": 6,
+   "slop_per_100w": 0.0,
+   "n_tasks": 3
+  },
+  {
+   "system": "S3",
+   "tell_score": 0.5171,
+   "v2_range": [
+    0.3729,
+    0.6091
+   ],
+   "n_runs": 3,
+   "headline_qwen27b_rubric": null,
+   "headline_qwen27b_invented": null,
+   "headline_n": 0,
+   "rubric": 0.4714,
+   "dasein_v1": 0.8331,
+   "grounding": 0.8667,
+   "invented_facts": 4,
+   "slop_per_100w": 0.42,
+   "n_tasks": 3
+  },
+  {
+   "system": "S4",
+   "tell_score": 0.2344,
+   "v2_range": [
+    0.1826,
+    0.2892
+   ],
+   "n_runs": 3,
+   "headline_qwen27b_rubric": null,
+   "headline_qwen27b_invented": null,
+   "headline_n": 0,
+   "rubric": 0.3762,
+   "dasein_v1": 0.6671,
+   "grounding": 0,
+   "invented_facts": 42,
+   "slop_per_100w": 0.13,
+   "n_tasks": 3
+  },
+  {
+   "system": "S5",
+   "tell_score": 0.4651,
+   "v2_range": [
+    0.3206,
+    0.5886
+   ],
+   "n_runs": 9,
+   "headline_qwen27b_rubric": 0.6381,
+   "headline_qwen27b_invented": 0,
+   "headline_n": 3,
+   "rubric": 0.4571,
+   "dasein_v1": 0.8764,
+   "grounding": 0.7333,
+   "invented_facts": 8,
+   "slop_per_100w": 0.0,
+   "n_tasks": 3
+  },
+  {
+   "system": "S6",
+   "tell_score": 0.8482,
+   "v2_range": [
+    0.82,
+    0.8914
+   ],
+   "n_runs": 3,
+   "headline_qwen27b_rubric": 0.9905,
+   "headline_qwen27b_invented": 0,
+   "headline_n": 3,
+   "rubric": 0.8714,
+   "dasein_v1": 0.9218,
+   "grounding": 0.8333,
+   "invented_facts": 5,
+   "slop_per_100w": 0.18,
+   "n_tasks": 3
+  },
+  {
+   "system": "S7",
+   "tell_score": 0.5285,
+   "v2_range": [
+    0.3999,
+    0.7029
+   ],
+   "n_runs": 9,
+   "headline_qwen27b_rubric": 0.619,
+   "headline_qwen27b_invented": 0,
+   "headline_n": 3,
+   "rubric": 0.5143,
+   "dasein_v1": 0.6775,
+   "grounding": 0.8,
+   "invented_facts": 6,
+   "slop_per_100w": 0.38,
+   "n_tasks": 3
+  }
+ ],
+ "pairwise": [
+  {
+   "task": "day-blog",
+   "vs": "S5",
+   "judge": "claude",
+   "dasein_first": true,
+   "dasein_more_human": true
+  },
+  {
+   "task": "day-blog",
+   "vs": "S5",
+   "judge": "claude",
+   "dasein_first": false,
+   "dasein_more_human": false
+  },
+  {
+   "task": "day-blog",
+   "vs": "S5",
+   "judge": "astra",
+   "dasein_first": true,
+   "dasein_more_human": false
+  },
+  {
+   "task": "day-blog",
+   "vs": "S5",
+   "judge": "astra",
+   "dasein_first": false,
+   "dasein_more_human": false
+  },
+  {
+   "task": "day-blog",
+   "vs": "S7",
+   "judge": "claude",
+   "dasein_first": true,
+   "dasein_more_human": true
+  },
+  {
+   "task": "day-blog",
+   "vs": "S7",
+   "judge": "claude",
+   "dasein_first": false,
+   "dasein_more_human": true
+  },
+  {
+   "task": "day-blog",
+   "vs": "S7",
+   "judge": "astra",
+   "dasein_first": true,
+   "dasein_more_human": false
+  },
+  {
+   "task": "day-blog",
+   "vs": "S7",
+   "judge": "astra",
+   "dasein_first": false,
+   "dasein_more_human": false
+  },
+  {
+   "task": "recent-essay",
+   "vs": "S5",
+   "judge": "claude",
+   "dasein_first": true,
+   "dasein_more_human": true
+  },
+  {
+   "task": "recent-essay",
+   "vs": "S5",
+   "judge": "claude",
+   "dasein_first": false,
+   "dasein_more_human": false
+  },
+  {
+   "task": "recent-essay",
+   "vs": "S5",
+   "judge": "astra",
+   "dasein_first": true,
+   "dasein_more_human": false
+  },
+  {
+   "task": "recent-essay",
+   "vs": "S5",
+   "judge": "astra",
+   "dasein_first": false,
+   "dasein_more_human": false
+  },
+  {
+   "task": "recent-essay",
+   "vs": "S7",
+   "judge": "claude",
+   "dasein_first": true,
+   "dasein_more_human": true
+  },
+  {
+   "task": "recent-essay",
+   "vs": "S7",
+   "judge": "claude",
+   "dasein_first": false,
+   "dasein_more_human": true
+  },
+  {
+   "task": "recent-essay",
+   "vs": "S7",
+   "judge": "astra",
+   "dasein_first": true,
+   "dasein_more_human": false
+  },
+  {
+   "task": "recent-essay",
+   "vs": "S7",
+   "judge": "astra",
+   "dasein_first": false,
+   "dasein_more_human": true
+  },
+  {
+   "task": "followup",
+   "vs": "S5",
+   "judge": "claude",
+   "dasein_first": true,
+   "dasein_more_human": true
+  },
+  {
+   "task": "followup",
+   "vs": "S5",
+   "judge": "claude",
+   "dasein_first": false,
+   "dasein_more_human": true
+  },
+  {
+   "task": "followup",
+   "vs": "S5",
+   "judge": "astra",
+   "dasein_first": true,
+   "dasein_more_human": false
+  },
+  {
+   "task": "followup",
+   "vs": "S5",
+   "judge": "astra",
+   "dasein_first": false,
+   "dasein_more_human": false
+  },
+  {
+   "task": "followup",
+   "vs": "S7",
+   "judge": "claude",
+   "dasein_first": true,
+   "dasein_more_human": true
+  },
+  {
+   "task": "followup",
+   "vs": "S7",
+   "judge": "claude",
+   "dasein_first": false,
+   "dasein_more_human": true
+  },
+  {
+   "task": "followup",
+   "vs": "S7",
+   "judge": "astra",
+   "dasein_first": true,
+   "dasein_more_human": false
+  },
+  {
+   "task": "followup",
+   "vs": "S7",
+   "judge": "astra",
+   "dasein_first": false,
+   "dasein_more_human": false
+  }
+ ],
+ "pairwise_summary": {
+  "S5": {
+   "dasein_wins": 4,
+   "n": 12,
+   "rate_ci95": [
+    0.333,
+    0.138,
+    0.609
+   ]
+  },
+  "S7": {
+   "dasein_wins": 7,
+   "n": 12,
+   "rate_ci95": [
+    0.583,
+    0.32,
+    0.807
+   ]
+  }
+ },
+ "reward_model": {
+  "name": "dasein-score",
+  "v2": "0.8 x mean(Claude-sonnet, Astra) 7-criterion rubric + 0.2 x v1 - 0.02/invented fact; gates: length +-25%, slop, public-safety",
+  "v1_discriminator": {
+   "n_train": 14942,
+   "hc3_heldout_acc": 0.9187,
+   "min_vs_ai_heldout_acc": 0.9744,
+   "n_min_test": 312,
+   "hc3_human": 5768,
+   "hc3_ai": 8257,
+   "min_human": 777,
+   "min_ai": 776
+  }
+ }
+}

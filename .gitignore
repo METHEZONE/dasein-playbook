@@ -1,0 +1,33 @@
+# personal data: never commit
+data/*
+!data/*.py
+!data/sample/
+data/sample/*
+!data/sample/redacted_sample.jsonl
+raw/
+*.jsonl
+!data/sample/redacted_sample.jsonl
+!dasein-one/data/ai_generic.jsonl
+dasein-one/data/other_humans.jsonl
+.dasein/
+
+# models, eval outputs, caches
+*.pkl
+_eval/
+train/_eval/
+train/disc.pkl
+__pycache__/
+*.pyc
+.venv/
+*.egg-info/
+
+# keys and env
+.env
+.env.*
+*.key
+*_key
+.gmi_key
+*.pem
+
+# local tool state
+.omx/
