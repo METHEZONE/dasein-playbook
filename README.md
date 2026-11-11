@@ -39,6 +39,33 @@ AI writing sounds like nobody in particular because the model has no world. It d
 
 Dasein grounds each piece of writing in your own records. It plans what to say from them, pools drafts from several writers, reranks those drafts with a human-likeness rubric, and fact-checks the winner against the records. The reward model is fit to you.
 
+## Why we built this, and how
+
+**The problem.** Nobody wants to read what someone else's agent wrote. Models are tuned with RLHF on what the average rater likes, so they write like the average person. So does everyone who uses them.
+
+**First idea: RLHF for one person.** Don't fit the reward to the average. Fit it to me.
+
+**Wall #1: cost.** Real RLHF needs thousands of human labels and GPUs. Nobody is going to rate their own writing thousands of times, and most people don't have a training box.
+
+**Reframe.** You already label your writing every day. Every message you hit send on is a vote: *this is me*. So the label is free. The reward model can learn "you vs not-you" straight from what you sent.
+
+**Wall #2: style isn't enough.** A model can copy how you write and still not know what you'd say. It doesn't know who you met today, what you promised them, or what happened since. That's where the slop comes back: it fills the gap with generic detail or invents some. So the writer has to be grounded in your actual records and in what's going on with each person.
+
+**What we built.**
+
+1. **A personal reward model (dasein-score).** Positives: 777 things I actually said. Negatives: 776 answers a plain LLM gave to the *same* topics (`data/disc.py`), plus HC3 human/ChatGPT pairs. A char+word n-gram TF-IDF logistic regression, small enough to fit on a laptop in seconds. On top of that: a fluency floor, a grounding check against the context, a slop-phrase penalty and a surprisal bonus (`train/tell_score.py`).
+2. **A grounded writer (`train/dasein_final.py`).** An open model (DeepSeek-V3) reads the day's records and plans 4 angles, writes 2 drafts per angle, and gates them on length, slop rate and invented specifics. Survivors get reranked: 0.8 x a 7-criterion rubric + 0.2 x dasein-score.
+3. **A fact-fix pass (`train/revise.py`).** The judges list claims that aren't in the records. The smallest edit that cuts them wins.
+4. **dasein-one.** The part you can actually use: the same reward idea, per-person relationship notes, and a `learn()` loop that refits from every message you send. Shipped as an MCP server so any agent gets it, set up with one paste. If it takes more than that, nobody sets it up.
+
+One rule we kept strict: an agent that *answers you* and an agent that *writes as you* are different jobs. Dasein only does the second.
+
+**What we also tried.** LoRA fine-tuning on MLX and rejection-sampling SFT (`train/gen.py`, `train/build_sft.py`). They didn't beat inference-time planning + best-of-n + rerank, so no weights are trained in the headline result.
+
+**What happened.** The reward model separates me from a plain LLM 97.4% of the time on held-out text (91.9% on HC3 human vs ChatGPT). An independent judge scored Dasein 0.99 vs 0.64 for Claude and 0.62 for GPT with the same context. But blind pairwise "which one is human" is still a coin flip (4/12 and 7/12), and that judge is lenient. We claim no human-likeness win yet. Details in [Results](#results-honest-version).
+
+**What's next.** "You vs other people" is the real test, not "you vs AI". Next: a stricter judge that punishes invented facts, bigger blind human tests, and DPO/LoRA on the sent-mail reward.
+
 This is research code from a 4-hour hackathon build, not a library. It is published so you can copy the approach and run it on your own data. Expect to read and edit scripts.
 
 **Built on [gbrain](https://github.com/garrytan/gbrain).** We run gbrain as our main memory graph, and `relationship()` reads it automatically when it's installed. If you're not using gbrain yet, go check it out. The setup prompt will offer to install it (it asks first).
