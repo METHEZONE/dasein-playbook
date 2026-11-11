@@ -4,7 +4,11 @@ RLHF taught models to write for everyone. dasein-one does RLHF for one person.
 
 ## Paste this into your agent
 
-Open Claude Code or Codex (with your Gmail/Slack connectors on) and paste the contents of [SETUP_PROMPT.md](SETUP_PROMPT.md). It installs, asks consent, imports, fits, registers, and tests.
+```
+Set up dasein-one for me. Follow https://raw.githubusercontent.com/METHEZONE/dasein-playbook/main/dasein-one/SETUP_PROMPT.md step by step.
+```
+
+It installs, asks consent, imports, fits, registers, and tests. Full prompt: [SETUP_PROMPT.md](SETUP_PROMPT.md).
 
 ## Setup (manual)
 

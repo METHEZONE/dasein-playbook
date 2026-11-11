@@ -1,5 +1,13 @@
 # Dasein
 
+**Just paste this into Claude Code or Codex:**
+
+```
+Set up dasein-one for me. Follow https://raw.githubusercontent.com/METHEZONE/dasein-playbook/main/dasein-one/SETUP_PROMPT.md step by step.
+```
+
+It installs, asks before reading anything, learns your voice from what you sent, and plugs into your agent over MCP. Your data stays in `~/.dasein` on your machine.
+
 A playbook for training and scoring a writing agent on your own writing.
 
 AI writing sounds like nobody in particular because the model has no world. It doesn't know where you were today, who you talked to, or what you care about, so it fills the gap with the average of everyone. Dasein grounds each piece of writing in your own records. It plans what to say from them, pools drafts from several writers, reranks those drafts with a human-likeness rubric, and fact-checks the winner against the records. You can think of it as RLHF for one person: the reward model is fit to you.
