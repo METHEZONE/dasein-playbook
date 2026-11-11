@@ -8,6 +8,8 @@ Set up dasein-one for me. Follow https://raw.githubusercontent.com/METHEZONE/das
 
 It installs, asks before reading anything, learns your voice from what you sent, and plugs into your agent over MCP. Your data stays in `~/.dasein` on your machine.
 
+**Built on [gbrain](https://github.com/garrytan/gbrain).** We run gbrain as our main memory graph, and `relationship()` reads it automatically when it's installed. If you're not using gbrain yet, go check it out. The setup prompt will offer to install it (it asks first).
+
 A playbook for training and scoring a writing agent on your own writing.
 
 AI writing sounds like nobody in particular because the model has no world. It doesn't know where you were today, who you talked to, or what you care about, so it fills the gap with the average of everyone. Dasein grounds each piece of writing in your own records. It plans what to say from them, pools drafts from several writers, reranks those drafts with a human-likeness rubric, and fact-checks the winner against the records. You can think of it as RLHF for one person: the reward model is fit to you.

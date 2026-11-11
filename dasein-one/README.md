@@ -27,7 +27,7 @@ See it work: `dasein ui [--llm http://127.0.0.1:18080/v1 --model <name>]` opens 
 1. Your texts are positives; bundled generic AI answers (HC3 ChatGPT, `data/ai_generic.jsonl`) and optional LLM rewrites of your texts are negatives.
 2. A char+word n-gram TF-IDF logistic regression becomes your personal reward model (`~/.dasein/reward.pkl`).
 3. The agent writes N drafts, calls `score_as_me`, sends the highest. No API key needed.
-4. `relationship(person)` / `remember(...)` keep per-person notes in `~/.dasein/people/<name>.md` (`dasein person set|show`).
+4. `relationship(person)` reads your [gbrain](https://github.com/garrytan/gbrain) memory graph when it's installed (that's what we run). Without it, `relationship` / `remember(...)` fall back to per-person notes in `~/.dasein/people/<name>.md` (`dasein person set|show`).
 
 Have your agent call `learn(sent_text, person)` after every message it sends; the model refits itself every 20.
 
