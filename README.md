@@ -54,7 +54,7 @@ Dasein grounds each piece of writing in your own records. It plans what to say f
 **What we built.**
 
 1. **A personal reward model (dasein-score).** Positives: 777 things I actually said. Negatives: 776 answers a plain LLM gave to the *same* topics (`data/disc.py`), plus HC3 human/ChatGPT pairs. A char+word n-gram TF-IDF logistic regression, small enough to fit on a laptop in seconds. On top of that: a fluency floor, a grounding check against the context, a slop-phrase penalty and a surprisal bonus (`train/tell_score.py`).
-2. **A grounded writer (`train/dasein_final.py`).** An open model (DeepSeek-V3) reads the day's records and plans 4 angles, writes 2 drafts per angle, and gates them on length, slop rate and invented specifics. Survivors get reranked: 0.8 x a 7-criterion rubric + 0.2 x dasein-score.
+2. **A grounded writer (`train/dasein_final.py`).** It reads the day's records and plans 4 angles; three writers (DeepSeek-V3 on GMI, GPT, Claude) draft each angle, 12 drafts in all, which are gated on length, slop rate and invented specifics. Survivors get reranked: 0.8 x a 7-criterion rubric + 0.2 x dasein-score.
 3. **A fact-fix pass (`train/revise.py`).** The judges list claims that aren't in the records. The smallest edit that cuts them wins.
 4. **dasein-one.** The part you can actually use: the same reward idea, per-person relationship notes, and a `learn()` loop that refits from every message you send. Shipped as an MCP server so any agent gets it, set up with one paste. If it takes more than that, nobody sets it up.
 
