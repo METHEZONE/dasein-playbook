@@ -70,6 +70,30 @@ This is research code from a 4-hour hackathon build, not a library. It is publis
 
 **Built on [gbrain](https://github.com/garrytan/gbrain).** We run gbrain as our main memory graph, and `relationship()` reads it automatically when it's installed. If you're not using gbrain yet, go check it out. The setup prompt will offer to install it (it asks first).
 
+## Plain AI vs Dasein
+
+Same writer (Claude Code), same task. Left: the model on its own. Right: the model with Dasein's brief (my closest real messages, fingerprint, rules), best of 4 drafts picked by my reward model. Score = how much the reward model thinks I wrote it, 0-100.
+
+**"Tell a friend I can't make Friday, offer Monday"**
+
+| Plain AI (33) | Dasein (99) |
+|---|---|
+| Hey! I'm so sorry, but I can't make it Friday after all. Could we do Monday instead? Let me know if that works for you! | Hey, I can't make Friday, something came up. Could we just do Monday instead? Honestly that'd work way better for me anyway, if you're free. |
+
+**"Follow up with someone I met at a startup event last night, suggest coffee next week"**
+
+| Plain AI (24) | Dasein (94) |
+|---|---|
+| Hi [Name], It was great meeting you at the startup event last night. I really enjoyed our conversation about [topic] and would love to keep it going. Would you be up for coffee sometime next week? I'm fairly flexible, so let me know what day and time work for you and I'm happy to come to a spot near you. Looking forward to it! Best, [Your name] | Hey, really good meeting you at the startup event last night. I kind of wanna keep going on what we were talking about. Coffee next week? Just let me know what day works for you. |
+
+**"Tell my cofounder the demo video needs one more cut before we ship it"**
+
+| Plain AI (88) | Dasein (100) |
+|---|---|
+| Hey, the demo video needs one more cut before we ship it. I'll send the updated version as soon as it's ready. | I think the demo video needs one more cut before we ship it. Honestly it's close, but it's not quite there yet, so let's do one more pass first. |
+
+The scores come from the same reward model that picked the winner, so they show what it learned, not an independent verdict. For independent judging and blind tests, see [Results](#results-honest-version). When the plain draft is already short and plain (third example), the gap shrinks.
+
 ## Features
 
 - **Personal reward model.** `dasein fit` trains a small classifier on your text and reports two held-out numbers: you vs AI, and you vs other people.
